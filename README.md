@@ -1,234 +1,219 @@
-# Contribution 1: [Feature]: OpenAI Agents SDK Cookbook
+# AI301 Open Source Contribution
 
-**Contribution Number:** 1
-**Student:** Aryahvishwa Babu
-**Issue:** https://github.com/usemoss/moss/issues/92
-**Status:** Phase I — Complete / Monitoring Existing PR
+## Contributor
 
----
-
-## Why I Chose This Issue
-
-I chose this issue because it connects directly to my interest in AI agents, retrieval systems, and practical machine learning tools. The issue asks for a cookbook example showing how Moss can be used with the OpenAI Agents SDK as a retrieval tool. This stood out to me because I have worked with semantic search and AI-related projects before, so this issue gives me a chance to contribute to an open-source project that is closely related to my technical interests.
-
-I also chose this issue because it has a clear scope and is labeled as a good first issue. Instead of changing a large internal part of the codebase, the contribution focuses on building a developer-facing example that helps users understand how to connect Moss retrieval with an agent workflow. I hope to learn more about how production-style AI agents use retrieval tools, how cookbook examples are structured in open-source projects, and how to write documentation that is useful for developers.
-
-One important thing I noticed during issue selection is that another contributor has already submitted PR #146 for this issue. Because of that, I may need to either help review/test the existing PR, look for requested changes from the maintainers, or switch to another issue if this one gets merged before I can contribute meaningfully.
+**Name:** Aryahvishwa Babu
+**GitHub:** [AryahCodes](https://github.com/AryahCodes)
+**Course:** CodePath AI301 Open Source Capstone Summer 2026
 
 ---
 
-## Understanding the Issue
+# Contribution 1: Moss OpenAI Agents SDK Cookbook
 
-### Problem Description
+## Project
 
-The project is missing a cookbook example that shows how to use Moss together with the OpenAI Agents SDK. Moss provides semantic search functionality, but a new user may not immediately understand how to expose Moss search as a tool that an AI agent can call during an end-to-end run.
+**Repository:** [usemoss/moss](https://github.com/usemoss/moss)
+**Issue:** [#92 - Feature: OpenAI Agents SDK Cookbook](https://github.com/usemoss/moss/issues/92)
+**My Fork:** [AryahCodes/moss](https://github.com/AryahCodes/moss)
+**Working Branch:** [fix-issue-92-openai-agents-cookbook](https://github.com/AryahCodes/moss/tree/fix-issue-92-openai-agents-cookbook)
 
-In my own words, the missing feature is an example that connects three pieces together: loading a Moss index locally, wrapping Moss search as an agent tool, and having an agent call that tool to answer a user question with retrieved context.
+---
 
-### Expected Behavior
+## Phase I: Issue Selection
 
-The expected behavior is that the repository should include an example under:
+### Selected Issue
 
-`examples/cookbook/openai-agents/`
+I selected issue #92 from the Moss repository. The issue asks for a cookbook example showing how to connect Moss semantic search with the OpenAI Agents SDK.
 
-The example should show how to:
+The requested example should show how to:
 
-1. Load a Moss index locally using `load_index()` before querying.
-2. Wrap `client.query()` as a function tool using the OpenAI Agents SDK `@function_tool` decorator.
-3. Accept `query`, `top_k`, and an optional metadata `filter` as tool arguments.
+1. Load a Moss index locally using `load_index()`.
+2. Wrap `client.query()` as an OpenAI Agents SDK tool using the `@function_tool` decorator.
+3. Support tool arguments for `query`, `top_k`, and optional metadata `filter`.
 4. Run an end-to-end agent example where the agent receives a question, calls the Moss retrieval tool, and returns a grounded answer.
-5. Include a short README explaining when to use metadata filters and the local-vs-cloud speed tradeoff.
+5. Include a README explaining metadata filters and the local-vs-cloud speed tradeoff.
 
-### Current Behavior
+### Why I Chose This Issue
 
-Currently, issue #92 is still open, but there is already an open pull request, PR #146, that appears to address the issue. The issue page shows that another contributor submitted a PR and said it follows the cookbook pattern, includes tool wrappers using `@function_tool`, and supports metadata filters.
+I chose this issue because it connects directly to AI agents, retrieval tools, and semantic search. The scope is also realistic for an open-source first contribution because it is a cookbook/example contribution rather than a large core-library change.
 
-Because of this, the issue may no longer be fully available for a new implementation from scratch. My next step is to review the linked PR and see whether there are still ways to contribute, such as testing the example, improving documentation, fixing maintainer feedback, or helping with missing acceptance criteria.
+This issue is also useful for future Moss users because examples make it easier for new developers to understand how to use the project in real applications.
 
-### Affected Components
+### Current Issue Status
 
-The main parts of the codebase involved are:
+Issue #92 is still open. There is an existing linked PR, #146, that attempts to add the OpenAI Agents SDK cookbook example, but it has not been merged yet.
 
-* `examples/` — this is where project examples are stored.
-* `examples/cookbook/openai-agents/` — this is the expected location for the new cookbook example.
-* `README.md` inside the new example folder — this should explain setup, usage, metadata filters, and the local-vs-cloud speed tradeoff.
-* Moss Python SDK usage — the example should use Moss index loading and querying.
-* OpenAI Agents SDK usage — the example should use `@function_tool` and an end-to-end agent run.
+Because of that, I am treating the issue as still active while being careful not to duplicate work that already exists. My current plan is to review the existing PR, compare it against the issue requirements, and identify whether there are remaining bugs, documentation gaps, or test issues that I can help fix.
 
 ---
+
+# Phase II: Reproduce & Plan
 
 ## Reproduction Process
 
 ### Environment Setup
 
-For Phase I, I reviewed the issue page, acceptance criteria, labels, comments, and linked pull request information. I also created/forked the relevant repositories needed to track my contribution work.
+I set up the Moss repository locally by working from my fork and adding the original Moss repository as the upstream remote.
 
-I have not started local implementation yet because I first need to check whether PR #146 already completes the issue. Since the issue has an existing open PR, the correct next step is to inspect that PR before duplicating work.
+Commands used:
+
+```bash
+git remote add upstream https://github.com/usemoss/moss.git
+git fetch upstream
+git checkout main
+git pull origin main
+git checkout -b fix-issue-92-openai-agents-cookbook
+git push origin fix-issue-92-openai-agents-cookbook
+```
+
+This created and pushed my working branch for Phase II:
+
+```text
+https://github.com/AryahCodes/moss/tree/fix-issue-92-openai-agents-cookbook
+```
+
+I also confirmed that I was on the correct branch locally:
+
+```bash
+git branch
+```
+
+Output:
+
+```text
+* fix-issue-92-openai-agents-cookbook
+  main
+```
 
 ### Steps to Reproduce
 
-Since this is a missing-feature issue, the reproduction process is not about triggering a runtime bug. Instead, reproduction means confirming whether the requested cookbook example exists and whether the issue is still available.
+1. Open the Moss repository locally.
 
-1. Open the Moss repository.
-2. Navigate to issue #92.
-3. Read the issue description and acceptance criteria.
-4. Check the comments and linked development activity.
-5. Notice that PR #146 has already been submitted for this issue.
-6. Determine whether the issue is still a good candidate or whether I should contribute by testing/reviewing the existing PR.
+2. Confirm that I am on my working branch:
+
+```bash
+git branch
+```
+
+3. Check the existing cookbook examples:
+
+```bash
+ls examples/cookbook
+```
+
+4. The output was:
+
+```text
+agentphone
+autogen
+crewai
+daytona
+dspy
+generalist-moss-voice-agent
+haystack
+langchain
+langgraph
+mastra
+moss-cognee-daytona
+pydantic-ai
+sim
+```
+
+5. Expected behavior:
+
+There should be an `examples/cookbook/openai-agents/` directory because issue #92 requests a cookbook example for using Moss with the OpenAI Agents SDK.
+
+6. Actual behavior:
+
+There is no `openai-agents` directory under `examples/cookbook/` on the current branch.
+
+This reproduces the missing cookbook issue locally. The project has multiple existing cookbook examples for other agent frameworks and retrieval integrations, but the OpenAI Agents SDK cookbook requested in issue #92 is not present on the current branch.
 
 ### Reproduction Evidence
 
-* **Issue link:** https://github.com/usemoss/moss/issues/92
-* **Linked PR:** https://github.com/usemoss/moss/pull/146
-* **My findings:** I found that issue #92 is still open and labeled as a good first issue, but another contributor has already submitted PR #146. This means I should not blindly implement the same solution from scratch. I need to review the existing PR and see whether there is still useful work to do.
+Working branch:
+
+```text
+https://github.com/AryahCodes/moss/tree/fix-issue-92-openai-agents-cookbook
+```
+
+Local command used to reproduce the missing cookbook:
+
+```bash
+ls examples/cookbook
+```
+
+The command showed cookbook folders for other frameworks such as LangChain, LangGraph, CrewAI, AutoGen, DSPy, Haystack, Pydantic AI, and others, but no `openai-agents` folder.
 
 ---
 
 ## Solution Approach
 
-### Analysis
-
-The original root cause is that Moss needs a cookbook example showing how to connect Moss retrieval to an OpenAI Agents SDK agent. The desired example should demonstrate local index loading, a function tool wrapper around `client.query()`, metadata filter support, and an end-to-end agent run.
-
-However, after reviewing the issue activity, the main contribution risk is that another PR may already solve the issue. If PR #146 satisfies all acceptance criteria and gets merged, this issue will no longer be a good choice for my own contribution. If PR #146 is incomplete or receives maintainer feedback, I may still be able to contribute by testing, improving documentation, or helping address gaps.
-
-### Proposed Solution
-
-My proposed next step is to inspect PR #146 and compare it against the acceptance criteria from issue #92.
-
-I will check whether the PR:
-
-1. Adds the example under `examples/cookbook/openai-agents/`.
-2. Calls `load_index()` before the agent runs.
-3. Uses the OpenAI Agents SDK `@function_tool` decorator.
-4. Supports `query`, `top_k`, and optional `filter` arguments.
-5. Includes a README explaining metadata filters and the local-vs-cloud speed tradeoff.
-
-If the PR is incomplete, I can contribute by suggesting or implementing missing pieces. If the PR is complete, I should switch to another open issue before spending too much time on this one.
-
 ### Implementation Plan
 
-Using the UMPIRE framework:
-
 **Understand:**
-The issue asks for a cookbook example that demonstrates Moss being used as a retrieval tool inside an OpenAI Agents SDK agent. The example should load a Moss index first, define a tool around `client.query()`, support `query`, `top_k`, and optional `filter`, and then show an agent answering a question using retrieved results.
+Issue #92 asks for a cookbook example that shows how to connect Moss semantic search with the OpenAI Agents SDK. The example should load a Moss index locally using `load_index()`, wrap `client.query()` as an OpenAI Agents SDK `@function_tool`, support `query`, `top_k`, and optional metadata filters, and include an end-to-end agent run that returns a grounded answer.
+
+The core problem is not a runtime bug in the current main branch. Instead, the problem is that the requested cookbook example is missing from the repository.
 
 **Match:**
-I will compare the requested cookbook example with existing examples in the Moss repository and with PR #146. I will look for similar cookbook patterns, especially how example folders, README files, and tool integrations are structured.
+The Moss repository already has cookbook examples under `examples/cookbook/` for frameworks and tools such as LangChain, LangGraph, CrewAI, AutoGen, DSPy, Haystack, Pydantic AI, and others. I will use these examples as references for the expected folder structure, README style, setup instructions, and demo format.
+
+I will also review PR #146 because it already attempts to solve this issue. My goal is to avoid duplicating that work and instead find a focused contribution opportunity if the existing PR has bugs, missing documentation, or incomplete acceptance criteria.
 
 **Plan:**
 
-1. Review issue #92 and write down the acceptance criteria.
-2. Open PR #146 and inspect the changed files.
-3. Compare PR #146 against the acceptance criteria.
-4. If the PR is missing something, identify a small improvement I can make.
-5. If the PR is complete, choose a different issue before Phase II.
-6. If contributing to this issue is still possible, fork the repository and create a branch.
-7. Make a focused change, such as documentation improvement, testing improvement, or missing acceptance criteria fix.
-8. Run the example or relevant tests.
-9. Document the results in this README.
-10. Submit a PR only if there is a real gap to fix.
+1. Review the existing cookbook examples under `examples/cookbook/`.
+2. Compare their structure and README style so the OpenAI Agents SDK cookbook follows the same pattern.
+3. Review issue #92’s acceptance criteria carefully.
+4. Review PR #146 because it already attempts to add the OpenAI Agents SDK cookbook.
+5. Test whether the example from PR #146 runs locally.
+6. Check whether the PR correctly handles:
 
-**Implement:**
-Branch/commit links:
+   * `load_index()` before the agent runs
+   * `@function_tool` usage from the OpenAI Agents SDK
+   * `query`, `top_k`, and optional `filter` tool arguments
+   * metadata filter examples
+   * local-vs-cloud speed explanation in the README
+   * an end-to-end agent run that returns a grounded answer
+7. If PR #146 has confirmed bugs or missing documentation, I will make a focused contribution that fixes one of those gaps.
+8. If PR #146 gets merged and fully solves issue #92 before I contribute, I will pivot to another Moss issue instead of opening a duplicate PR.
 
-* Branch: Not started yet
-* Commit 1: Not started yet
-* Commit 2: Not started yet
+**Files I expect to inspect or modify:**
+
+```text
+examples/cookbook/openai-agents/README.md
+examples/cookbook/openai-agents/moss_openai_agents.py
+examples/cookbook/openai-agents/example_usage.py
+examples/cookbook/openai-agents/test_live.py
+```
+
+The exact file names may change depending on what already exists in PR #146 and what structure best matches the rest of the Moss cookbook examples.
 
 **Review:**
-
-Self-review checklist:
-
-* [ ] I checked whether PR #146 already solves the issue.
-* [ ] I avoided duplicating another contributor’s work.
-* [ ] I compared the existing PR against the issue acceptance criteria.
-* [ ] I identified whether there is still useful work I can do.
-* [ ] If I continue with this issue, my change is focused and non-duplicative.
-* [ ] If I switch issues, I document why.
+Before opening a PR, I will review the Moss repository’s contribution guidelines and make sure my changes are small, focused, and tied directly to issue #92 or to review feedback on PR #146. I will avoid making unrelated cleanup changes.
 
 **Evaluate:**
-I will evaluate whether this is still a valid contribution by reviewing PR #146. If there is no meaningful remaining work, I will switch issues rather than waste time or submit a duplicate PR.
+I will verify the work by:
+
+1. Running the cookbook example locally.
+2. Confirming that the agent can call the Moss retrieval tool.
+3. Confirming that `query` and `top_k` work as tool arguments.
+4. Testing at least one metadata filter example.
+5. Checking that `load_index()` is actually called before querying.
+6. Reading the README instructions from the perspective of a new user and making sure the setup/run steps are clear.
+7. Running any relevant tests or example commands included with the cookbook.
 
 ---
 
-## Testing Strategy
+## Current Status
 
-### Unit Tests
+Phase II is complete because I have:
 
-Since this issue is mostly about a cookbook/documentation example, traditional unit tests may not be required. However, if I contribute to the example, I should still verify the important behavior.
+1. Set up the Moss repository locally.
+2. Created and pushed my working branch.
+3. Reproduced the missing cookbook issue by confirming that `examples/cookbook/openai-agents/` is not present.
+4. Documented clear reproduction steps.
+5. Written an implementation plan for how I will review, test, and potentially contribute to issue #92.
 
-* [ ] Test case 1: Confirm that `load_index()` is called before the agent runs.
-* [ ] Test case 2: Confirm that the retrieval tool accepts a normal query.
-* [ ] Test case 3: Confirm that the optional metadata filter argument is handled.
-
-### Integration Tests
-
-* [ ] Integration scenario 1: Run the full cookbook example.
-* [ ] Integration scenario 2: Confirm the agent can call the Moss retrieval tool.
-* [ ] Integration scenario 3: Confirm the final answer uses retrieved context.
-
-### Manual Testing
-
-Not completed yet. My next step is to inspect PR #146 and determine whether there is still a contribution opportunity.
-
----
-
-## Implementation Notes
-
-### Week 1 Progress
-
-This week, I selected issue #92 from the Moss repository and started Phase I of the contribution process. I reviewed the issue description, acceptance criteria, labels, and comments. I also noticed that another contributor had already submitted PR #146 for this issue.
-
-This changed my plan. Instead of immediately starting a duplicate implementation, I need to review the existing PR and determine whether it fully satisfies the issue. If the PR is incomplete, I may contribute by testing it or improving missing parts. If it already completes the issue, I will switch to another issue before Phase II.
-
-### Week 2 Progress
-
-Not started yet.
-
-### Code Changes
-
-* **Files modified:** None yet.
-* **Key commits:** None yet.
-* **Approach decisions:** I decided not to start coding immediately because the issue already has an open PR. This is important because submitting duplicate work would not be useful to the project. My next step is to inspect the existing PR and look for a meaningful way to contribute.
-
----
-
-## Pull Request
-
-**PR Link:** Not submitted yet.
-
-**PR Description:**
-Not applicable yet.
-
-**Maintainer Feedback:**
-
-* No maintainer feedback yet.
-
-**Status:** Monitoring existing PR / deciding whether to continue or switch issues.
-
----
-
-## Learnings & Reflections
-
-### Technical Skills Gained
-
-Through this issue selection process, I learned that choosing an open-source issue is not only about whether the issue is interesting. It is also important to check whether someone else is already working on it, whether there is an open PR, and whether there is still meaningful work left to do.
-
-### Challenges Overcome
-
-The main challenge was realizing that even though the issue is open and labeled as a good first issue, there is already a linked PR that may solve it. I handled this by adjusting my plan instead of blindly continuing.
-
-### What I’d Do Differently Next Time
-
-Next time, I would check the linked pull requests and recent comments before commenting that I want to work on an issue. That would help me avoid choosing an issue that may already be close to completion.
-
----
-
-## Resources Used
-
-* GitHub issue #92: https://github.com/usemoss/moss/issues/92
-* Linked PR #146: https://github.com/usemoss/moss/pull/146
-* Moss repository: https://github.com/usemoss/moss
-* Moss documentation: https://docs.moss.dev
-* OpenAI Agents SDK documentation: https://openai.github.io/openai-agents-python/
+Next, I will move into Phase III by reviewing PR #146 in more detail and identifying a focused implementation, testing, or documentation contribution.
