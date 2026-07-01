@@ -1,17 +1,33 @@
-## Phase IV: Submit & Iterate
+# Week 5 Check-In: OpenAI Agents + Moss Contribution
+
+## Phase IV: Submit, Iterate, and Merge
 
 ### Pull Request
 
 **PR Link:**
 https://github.com/usemoss/moss/pull/311
 
-**PR Description:**
-This pull request completes the remaining acceptance criteria for the OpenAI Agents + Moss cookbook. I updated the Moss retrieval tool so it accepts a configurable query, `top_k`, and optional metadata filter. I also added structured retrieval results containing document IDs, text, relevance scores, and metadata.
-
-In addition, I added required environment-variable validation, updated the documentation, and created nine mocked unit tests that run without real API credentials or network access.
-
 **Relevant Issue:**
 Issue #92 — OpenAI Agents SDK Cookbook
+
+**Final Status:**
+✅ **Merged into `usemoss/moss`**
+
+### Contribution Summary
+
+My pull request completed the remaining acceptance criteria for the OpenAI Agents + Moss cookbook.
+
+I updated the Moss retrieval tool to:
+
+* Accept a configurable query
+* Accept a configurable `top_k` value between 1 and 20
+* Support optional metadata filters
+* Pass filters through `QueryOptions`
+* Return structured JSON containing document IDs, text, relevance scores, and metadata
+* Validate the required Moss and OpenAI environment variables
+* Preserve loading the local Moss index before running the agent
+
+I also expanded the README documentation and added nine mocked unit tests that run without API credentials or network access.
 
 ### Testing
 
@@ -22,7 +38,7 @@ The following checks passed locally:
 * `black --check example.py test_example.py`
 * `git diff --check`
 
-Test result:
+Local test result:
 
 ```text
 Ran 9 tests in 0.012s
@@ -30,21 +46,26 @@ Ran 9 tests in 0.012s
 OK
 ```
 
-The upstream repository’s available CI checks are also passing.
+After the final changes were pushed, all 12 GitHub Actions and repository checks passed.
 
-### Maintainer Feedback and Next Steps
+### Maintainer Feedback and Iteration
 
-* A maintainer asked whether I had signed the Contributor License Agreement.
-* I completed the CLA signing process.
-* The pull request is currently waiting for review from a maintainer with write access.
-* If changes are requested, I will update the same branch, push a follow-up commit, and respond to the reviewer.
+During review, GitHub Copilot identified that my test setup permanently replaced entries in `sys.modules` and depended on the current working directory. This could have caused the mocked modules to leak into other tests.
 
-### Status
+The maintainer asked me to address this comment before the pull request could be merged.
 
-**Awaiting review**
+I updated the tests so that:
 
-## Learnings & Reflections
+* Mocked modules are temporarily applied using `patch.dict`
+* Changes to `sys.path` only exist during the import
+* The original modules and path are restored afterward
 
-This contribution helped me learn how an OpenAI Agent can use Moss as a retrieval tool. I learned how to expose configurable tool arguments, pass metadata filters into retrieval options, return structured grounding information, and write mocked tests for code that normally depends on external APIs.
+I reran all nine tests, formatting checks, and compilation checks after making the change. The maintainer approved the updated implementation, and the pull request was successfully merged.
 
-The most important lesson was that submitting a pull request does not mean the code must already be perfect. Automated tests and maintainer review are part of the open-source development process.
+## Learnings and Reflections
+
+This contribution taught me that contributing to open source is not only about writing code that works. The code must also be reliable when it runs alongside the rest of a large project.
+
+The most important feedback involved test isolation. My original tests passed independently, but the mocked modules could have affected other tests in the repository. Fixing this helped me understand why tests must clean up their environment and avoid leaving behind global changes.
+
+I also gained experience responding to maintainer feedback, updating an existing pull request instead of creating a new one, working with automated CI checks, signing a Contributor License Agreement, and carrying a contribution through the complete process from issue selection to an upstream merge.
