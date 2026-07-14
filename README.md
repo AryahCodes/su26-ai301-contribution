@@ -6,6 +6,9 @@
 
 [Adapter: Tabnine — orthogonalhq/nous-core #300](https://github.com/orthogonalhq/nous-core/issues/300)
 
+### Fork
+https://github.com/AryahCodes/nous-core 
+
 ### Current Status
 
 Phase I — Issue Selection
