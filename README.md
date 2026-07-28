@@ -2,7 +2,7 @@
 
 ### Pull Request
 
-**PR:** <PASTE YOUR UPSTREAM PR LINK HERE>
+**PR:** [<PASTE YOUR UPSTREAM PR LINK HERE>](https://github.com/orthogonalhq/nous-core/pull/427)
 
 **Issue:** https://github.com/orthogonalhq/nous-core/issues/300
 
